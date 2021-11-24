@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,5 +22,13 @@ public class MainActivity extends AppCompatActivity {
         mRcvFood.setHasFixedSize(true);
         mFoodAdapter = new FoodAdapter(mlistFood,this);
         mRcvFood.setAdapter(mFoodAdapter);
+
+        mFoodAdapter.bindOnItemFoodClickListener(new OnItemFoodClickListener() {
+            @Override
+            public void onClick(int position) {
+                Toast.makeText(MainActivity.this, "Xóa"+ mlistFood.get(position).getName(), Toast.LENGTH_SHORT).show();
+                mlistFood.remove(position);
+            }
+        });
     }
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     private List<FoodModel> listFoods;
     private Context context;
+    private OnItemFoodClickListener onItemFoodClickListener;
 
     public FoodAdapter(List<FoodModel> listFoods, Context context) {
         this.listFoods = listFoods;
@@ -55,6 +57,16 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             tvDistance = itemView.findViewById(R.id.textViewDistance);
             tvTime = itemView.findViewById(R.id.textViewTime);
             tvDiscount = itemView.findViewById(R.id.textViewDiscount);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Toast.makeText(context, listFoods.get(getAdapterPosition()).getName(), Toast.LENGTH_SHORT).show();
+                    if(onItemFoodClickListener != null){
+                        onItemFoodClickListener.onClick(getAdapterPosition());
+                    }
+                }
+            });
         }
 
         public void bind(FoodModel foodModel){
@@ -68,4 +80,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         }
 
     }
+        public void bindOnItemFoodClickListener(OnItemFoodClickListener onItemFoodClickListener){
+            this.onItemFoodClickListener = onItemFoodClickListener;
+        }
 }
