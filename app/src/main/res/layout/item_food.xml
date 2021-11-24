@@ -123,6 +123,7 @@
                     app:layout_constraintLeft_toLeftOf="@id/constrainLayoutDistance"
                     app:layout_constraintRight_toRightOf="@id/constrainLayoutDistance"
                     android:text=">16.4km"
+                    android:maxLines="1"
                     android:id="@+id/textViewDistance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
