@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
         mRcvFood = findViewById(R.id.recyclerViewFood);
         mlistFood = FoodModel.getMock();
+        mlistFood = new ArrayList<>();
+        mlistFood.addAll(FoodModel.getMock());
         mRcvFood.setHasFixedSize(true);
         mFoodAdapter = new FoodAdapter(mlistFood,this);
         mRcvFood.setAdapter(mFoodAdapter);
@@ -26,8 +29,9 @@ public class MainActivity extends AppCompatActivity {
         mFoodAdapter.bindOnItemFoodClickListener(new OnItemFoodClickListener() {
             @Override
             public void onClick(int position) {
-                Toast.makeText(MainActivity.this, "Xóa"+ mlistFood.get(position).getName(), Toast.LENGTH_SHORT).show();
+//              Toast.makeText(MainActivity.this, "Xóa"+ mlistFood.get(position).getName(), Toast.LENGTH_SHORT).show();
                 mlistFood.remove(position);
+                mFoodAdapter.notifyItemRemoved(position);
             }
         });
     }
